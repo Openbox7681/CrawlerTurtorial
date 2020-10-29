@@ -1,6 +1,0 @@
-2019-06-17 103508	,	update : https://vuldb.com/?id.128635
-2019-06-17 103519	,	update : https://vuldb.com/?id.128634
-2019-06-17 103526	,	update : https://vuldb.com/?id.128633
-2019-06-17 103535	,	update : https://vuldb.com/?id.128632
-2019-06-17 103545	,	update : https://vuldb.com/?id.128631
-2019-06-17 103558	,	update : https://vuldb.com/?id.128629

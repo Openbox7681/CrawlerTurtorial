@@ -1,2 +1,0 @@
-2019-06-14 151440	,	add : https://vuldb.com/?id.130380
-2019-06-14 151452	,	add : https://vuldb.com/?id.130379

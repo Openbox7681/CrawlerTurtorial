@@ -1,7 +1,0 @@
-2019-06-17 152801	,	add : https://vuldb.com/?id.131361
-2019-06-17 152808	,	add : https://vuldb.com/?id.131360
-2019-06-17 152818	,	add : https://vuldb.com/?id.131359
-2019-06-17 152827	,	add : https://vuldb.com/?id.131358
-2019-06-17 152839	,	add : https://vuldb.com/?id.131357
-2019-06-17 152848	,	add : https://vuldb.com/?id.131356
-2019-06-17 152859	,	add : https://vuldb.com/?id.131355

@@ -1,0 +1,7 @@
+2019-06-17 145206	,	add : https://vuldb.com/?id.129820
+2019-06-17 145217	,	add : https://vuldb.com/?id.129819
+2019-06-17 145224	,	add : https://vuldb.com/?id.129818
+2019-06-17 145235	,	add : https://vuldb.com/?id.129817
+2019-06-17 145244	,	add : https://vuldb.com/?id.129816
+2019-06-17 145250	,	add : https://vuldb.com/?id.129815
+2019-06-17 145258	,	add : https://vuldb.com/?id.129814

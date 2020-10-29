@@ -1,0 +1,7 @@
+2019-06-17 173300	,	add : https://vuldb.com/?id.132734
+2019-06-17 173308	,	add : https://vuldb.com/?id.132733
+2019-06-17 173319	,	add : https://vuldb.com/?id.132732
+2019-06-17 173330	,	add : https://vuldb.com/?id.132731
+2019-06-17 173337	,	add : https://vuldb.com/?id.132730
+2019-06-17 173345	,	add : https://vuldb.com/?id.132729
+2019-06-17 173354	,	add : https://vuldb.com/?id.132728

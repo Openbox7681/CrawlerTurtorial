@@ -1,0 +1,72 @@
+FROM debian:jessie-slim
+MAINTAINER YuPingAOA <gisellewang@cyber00rn.org>
+
+# ensure local python is preferred over distribution python
+ENV PATH /usr/local/bin:$PATH
+
+# http://bugs.python.org/issue19846
+# "LANG=C"
+# At the moment, setting "LANG=C" on a Linux system *fundamentally breaks Python 3*, and that's not OK.
+# "PYTHONIOENCODING"
+# https://github.com/docker-library/python/issues/147
+ENV LANG=C.UTF-8 \
+ ES_IP=192.168.163.51 \
+ ES_PORT=59200
+
+# runtime dependencies
+RUN apt-get update && apt-get install -y --no-install-recommends \
+		ca-certificates \
+		netbase \
+	&& rm -rf /var/lib/apt/lists/*
+
+RUN set -ex \
+	\
+	&& savedAptMark="$(apt-mark showmanual)" \
+	&& apt-get update && apt-get install -y --no-install-recommends && apt-get install -y curl && apt-get install -y unzip\
+		build-essential \
+		wget \
+		python3 \
+		python3-dev \
+		python3-pip \
+	&& rm -rf /var/lib/apt/lists/ \
+	&& python3 -m pip install --upgrade pip setuptools wheel \
+	&& mkdir /usr/local/vuldb/
+
+WORKDIR /usr/local/vuldb/
+# Install the python packages
+COPY requirement.txt /usr/local/vuldb/
+RUN pip install -r requirement.txt
+
+COPY . /usr/local/vuldb/
+RUN chmod +x /usr/local/vuldb/run.sh
+
+# Install Chrome WebDriver
+RUN CHROMEDRIVER_VERSION=`curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE` && \
+    curl -sS -o /tmp/chromedriver_linux64.zip http://chromedriver.storage.googleapis.com/$CHROMEDRIVER_VERSION/chromedriver_linux64.zip && \
+    unzip -qq /tmp/chromedriver_linux64.zip -d  /usr/local/vuldb/ && \
+    rm /tmp/chromedriver_linux64.zip && \
+    chmod +x /usr/local/vuldb/chromedriver && \
+    ln -fs /usr/local/vuldb/chromedriver /usr/local/bin/chromedriver
+
+# Install Google Chrome
+RUN curl -sS -o - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - && \
+    echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list && \
+    apt-get -yqq update && \
+    apt-get -yqq install google-chrome-stable && \
+    rm -rf /var/lib/apt/lists/*
+
+# # Configure Supervisor
+# ADD ./etc/supervisord.conf /etc/
+# ADD ./etc/supervisor /etc/supervisor
+
+# Default configuration
+ENV DISPLAY :20.0
+ENV SCREEN_GEOMETRY "1440x900x24"
+ENV CHROMEDRIVER_PORT 4444
+ENV CHROMEDRIVER_WHITELISTED_IPS "127.0.0.1"
+ENV CHROMEDRIVER_URL_BASE ''
+ENV CHROMEDRIVER_EXTRA_ARGS ''
+
+EXPOSE 4444
+
+CMD ["sh", "-c", "/usr/local/vuldb/run.sh"]
